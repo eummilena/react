@@ -8,10 +8,10 @@ function App() {
   // 1 - resgatando dados
 
   useEffect(async () => {
-    const res = await fetch(url);
-    const data = await res.json();
+    const res = await fetch(url);// busca a resposta de requisição
+    const data = await res.json();// vai receber a requisição no formato json
 
-    setProducts(data);
+    setProducts(data);//vai receber os dados
   }, []);
 
   console.log(products);

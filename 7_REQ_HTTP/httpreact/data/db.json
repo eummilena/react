@@ -69,6 +69,11 @@
       "name": "cadeira",
       "price": "200.00",
       "id": 14
+    },
+    {
+      "name": "Garrafinha",
+      "price": "15.00",
+      "id": 15
     }
   ]
 }

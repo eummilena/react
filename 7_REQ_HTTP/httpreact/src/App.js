@@ -7,11 +7,15 @@ function App() {
   const [products, setProducts] = useState([]);
   // 1 - resgatando dados
 
-  useEffect(async () => {
-    const res = await fetch(url);// busca a resposta de requisição
-    const data = await res.json();// vai receber a requisição no formato json
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(url);// busca a resposta de requisição
+      const data = await res.json();// vai receber a requisição no formato json
 
-    setProducts(data);//vai receber os dados
+      setProducts(data);//vai receber os dados
+    }
+    fetchData();
+
   }, []);
 
   console.log(products);

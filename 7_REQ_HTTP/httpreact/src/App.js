@@ -6,7 +6,7 @@ const url = "http://localhost:3000/products";
 function App() {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("";)
+  const [price, setPrice] = useState("");
   // 1 - resgatando dados
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function App() {
             Preço:
             <input type="number" value={price} name="price" onChange={(e) => setPrice(e.target.value)} />
           </label>
-          <input type="submit" value={Criar} />
+          <input type="submit" value="Criar" />
         </form>
       </div>
     </div>

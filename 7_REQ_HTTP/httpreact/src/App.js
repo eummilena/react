@@ -17,6 +17,7 @@ function App() {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+
   // 1 - resgatando dados
 
   // useEffect(() => {
@@ -60,8 +61,10 @@ function App() {
       <h1>Lista de Produtos</h1>
       <ul>
         {
-          items && items.map((product) => (
-            <li key={product.id}>{product.name} - R${product.price}</li>
+          items &&
+          items.map((product) => (
+            <li key={product.id}>
+              {product.name} - R${product.price}</li>
           ))
         }
       </ul>

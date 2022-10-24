@@ -11,9 +11,9 @@ function App() {
 
   // 4 - custom hook
 
-  const { data } = useFetch(url);
+  const { data: items } = useFetch(url);
   // importando o data
-  console.log(data);
+
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -60,7 +60,7 @@ function App() {
       <h1>Lista de Produtos</h1>
       <ul>
         {
-          products.map((product) => (
+          items && items.map((product) => (
             <li key={product.id}>{product.name} - R${product.price}</li>
           ))
         }

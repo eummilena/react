@@ -12,6 +12,7 @@ function App() {
   // 4 - custom hook
 
   const { data } = useFetch(url);
+  // importando o data
   console.log(data);
 
   const [name, setName] = useState("");

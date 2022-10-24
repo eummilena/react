@@ -8,10 +8,10 @@ export const useFetch = (url) => {
         //requisicao assincrona
         const fetchData = async () => {
 
-            const res = await fetch(url)//resquest da url
-            const json = await res.json()// receber os dados no formato json
+            const res = await fetch(url);//resquest da url
+            const json = await res.json();// receber os dados no formato json
 
-            setData(json)
+            setData(json);
         }
         fetchData(); //executar a função
 

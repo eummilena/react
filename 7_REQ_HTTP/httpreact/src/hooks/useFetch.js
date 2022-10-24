@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
 
+
+
 // 4 - custom hook
 export const useFetch = (url) => {
     const [data, setData] = useState(null);
+
+
+    // 5 - refatorando post
+    const [config, setConfig] = useState(null);
+    const [method, setMethod] = useState(null);
+    const [callFetch, setCallFetch] = useState(false)
+
 
     useEffect(() => {
         //requisicao assincrona
@@ -15,7 +24,24 @@ export const useFetch = (url) => {
         }
         fetchData(); //executar a função
 
-    }, [url])//dependência
+    }, [url, callFetch /* tras dados atualizados no sistema */])//dependências
+
+    // 5 refatorando POST
+    useEffect(() => {
+        const httpRequest = async () => {
+            if (method === "POST") {
+                let fetchOptions = [url, config];
+
+                const json = await fetch(...fetchOptions);
+
+                const json = await res.json();
+                setCallFetch(json);
+            }
+
+
+        }
+        httpRequest();
+    }, [config])
 
     return { data };
 };

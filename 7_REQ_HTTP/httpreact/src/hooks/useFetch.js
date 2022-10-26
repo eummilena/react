@@ -47,8 +47,6 @@ export const useFetch = (url) => {
                 const json = await res.json();
                 setCallFetch(json);
             }
-
-
         }
         httpRequest();
     }, [config, method, url])

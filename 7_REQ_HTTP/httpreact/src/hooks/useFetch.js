@@ -35,7 +35,7 @@ export const useFetch = (url) => {
         }
         fetchData(); //executar a função
 
-    }, [url, callFetch]/* tras dados atualizados no sistema */])//dependências
+    }, [url, callFetch]);/* tras dados atualizados no sistema *///dependências
 
     // 5 refatorando POST
     useEffect(() => {

@@ -64,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <h1>Lista de Produtos</h1>
-      {/* 6 - loading */}
+      {/* 6 - state de loading */}
       {loading && <p>Carregando dados...</p>}
       {loading && (
         <ul>
@@ -88,7 +88,8 @@ function App() {
             Preço:
             <input type="number" value={price} name="price" onChange={(e) => setPrice(e.target.value)} />
           </label>
-          <input type="submit" value="Criar" />
+          {/* 7 - state de loading no post */}
+          {!loading && <input type="submit" value="Criar" />}
         </form>
       </div>
     </div>

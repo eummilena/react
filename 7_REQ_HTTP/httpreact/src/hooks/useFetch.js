@@ -10,7 +10,7 @@ export const useFetch = (url) => {
     // 5 - refatorando post
     const [config, setConfig] = useState(null);
     const [method, setMethod] = useState(null);
-    const [callFetch, setCallFetch] = useState(false)
+    const [callFetch, setCallFetch] = useState(false);
     const httpConfig = (data, method) => {
         if (method === "POST") {
             setConfig({
@@ -22,12 +22,15 @@ export const useFetch = (url) => {
             })
         }
     }
+    // 6 - estado de loading
 
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         //requisicao assincrona
         const fetchData = async () => {
-
+            // 6 - loading
+            setLoading(true)
             const res = await fetch(url);//resquest da url
             const json = await res.json();// receber os dados no formato json
 
@@ -51,10 +54,8 @@ export const useFetch = (url) => {
         httpRequest();
     }, [config, method, url])
 
-    return { data, httpConfig };
+    return { data, httpConfig, loading };
 };
 
-// 6 - loading
-setLoading(true)
-const res = await fetch(url);
+
 

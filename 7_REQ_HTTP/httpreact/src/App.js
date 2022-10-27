@@ -11,7 +11,7 @@ function App() {
 
   // 4 - custom hook
 
-  const { data: items } = useFetch(url);
+  const { data: items, httpConfig, loading, error } = useFetch(url);
   // importando o data = dizer da onde vai puxar s dados, no caso da URL
 
 
@@ -32,45 +32,52 @@ function App() {
   // }, []);
 
   // 2- add de produtos
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   const product = {
-  //     name,
-  //     price,
-  //   };
-  //   const res = await fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     },
-  //     body: JSON.stringify(product),
-  //   });
-  // 3 - carregamento dinâmico
+    const product = {
+      name,
+      price,
+    };
 
-  //   const addedProduct = await res.json();
-  //   setProducts((prevProducts) => [...prevProducts, addedProduct]);
+    //   const res = await fetch(url, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-type": "application/json"
+    //     },
+    //     body: JSON.stringify(product),
+    //   });
+    // 3 - carregamento dinâmico
+
+    //   const addedProduct = await res.json();
+    //   setProducts((prevProducts) => [...prevProducts, addedProduct]);
 
 
-  //  5 - refatorar post 
-  httpConfig(product, "POST");
-  setPrice("");
-  setName("");
-  // }
+    //  5 - refatorar post 
+    httpConfig(product, "POST");
+
+    setPrice("");
+    setName("");
+  };
 
 
   return (
     <div className="App">
       <h1>Lista de Produtos</h1>
-      <ul>
-        {
-          items &&
-          items.map((product) => (
-            <li key={product.id}>
-              {product.name} - R${product.price}</li>
-          ))
-        }
-      </ul>
+      {/* 6 - loading */}
+      {loading && <p>Carregando dados...</p>}
+      {loading && (
+        <ul>
+          {
+            items &&
+            items.map((product) => (
+              <li key={product.id}>
+                {product.name} - R${product.price}</li>
+            ))
+          }
+        </ul>
+      )}
+
       <div className="add-product">
         <form onSubmit={handleSubmit}>
           <label htmlFor="nome">

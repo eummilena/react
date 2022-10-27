@@ -32,28 +32,31 @@ function App() {
   // }, []);
 
   // 2- add de produtos
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
 
-    const product = {
-      name,
-      price,
-    };
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(product),
-    });
-    // 3 - carregamento dinâmico
+  //   const product = {
+  //     name,
+  //     price,
+  //   };
+  //   const res = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-type": "application/json"
+  //     },
+  //     body: JSON.stringify(product),
+  //   });
+  // 3 - carregamento dinâmico
 
-    const addedProduct = await res.json();
-    setProducts((prevProducts) => [...prevProducts, addedProduct]);
-    setPrice("");
-    setName("");
-  }
+  //   const addedProduct = await res.json();
+  //   setProducts((prevProducts) => [...prevProducts, addedProduct]);
 
+
+  //  5 - refatorar post 
+  httpConfig(product, "POST");
+  setPrice("");
+  setName("");
+  // }
 
 
   return (

@@ -53,3 +53,8 @@ export const useFetch = (url) => {
 
     return { data, httpConfig };
 };
+
+// 6 - loading
+setLoading(true)
+const res = await fetch(url);
+

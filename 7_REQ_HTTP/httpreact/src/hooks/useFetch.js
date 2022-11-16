@@ -2,108 +2,108 @@ import { useEffect, useState } from "react";
 
 // 4 - custom hook
 export const useFetch = (url) => {
-    const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
 
-    // 5 - refatorando post
-    const [config, setConfig] = useState(null);
-    const [method, setMethod] = useState(null);
-    const [callFetch, setCallFetch] = useState(false);
+  // 5 - refatorando post
+  const [config, setConfig] = useState(null);
+  const [method, setMethod] = useState(null);
+  const [callFetch, setCallFetch] = useState(false);
 
-    // 6 - estado de loading
-    const [loading, setLoading] = useState(false);
+  // 6 - estado de loading
+  const [loading, setLoading] = useState(false);
 
-    // 8 - tratando erros
-    const [error, setError] = useState(false);
+  // 8 - tratando erros
+  const [error, setError] = useState(false);
 
-    // 9 - desafio
-    const [itemId, setItemId] = useState(null);
+  // 9 - desafio
+  const [itemId, setItemId] = useState(null);
 
-    const httpConfig = (data, method) => {
-        if (method === "POST") {
-            setConfig({
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
+  const httpConfig = (data, method) => {
+    if (method === "POST") {
+      setConfig({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-            setMethod("POST");
-        } else if (method === "DELETE") {
-            setConfig({
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+      setMethod("POST");
+    } else if (method === "DELETE") {
+      setConfig({
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-            setMethod("DELETE");
-            setItemId(data);
-        }
+      setMethod("DELETE");
+      setItemId(data);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // 6 - estado de loading
+      // mudar throttling no network p 3g
+      setLoading(true);
+
+      // 8 - tratando erros
+      try {
+        const res = await fetch(url);
+
+        const json = await res.json();
+
+        setData(json);
+
+        setMethod(null);
+
+        // 8 - tratando erros
+        setError(null);
+      } catch (error) {
+        console.log(error.message);
+
+        setError("Houve um erro ao carregar os dados!");
+      }
+
+      setLoading(false);
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            // 6 - estado de loading
-            // mudar throttling no network p 3g
-            setLoading(true);
+    fetchData();
+  }, [url, callFetch]);
 
-            // 8 - tratando erros
-            try {
-                const res = await fetch(url);
+  // 5 - refatorando post
+  useEffect(() => {
+    const httpRequest = async () => {
+      if (method === "POST") {
+        // 7 - loading no post
+        // mudar throttling no network p 3g
+        setLoading(true);
 
-                const json = await res.json();
+        // 5 - refatorando post
+        let fetchOptions = [url, config];
 
-                setData(json);
+        const res = await fetch(...fetchOptions);
 
-                setMethod(null);
+        const json = await res.json();
 
-                // 8 - tratando erros
-                setError(null);
-            } catch (error) {
-                console.log(error.message);
+        setCallFetch(json);
+        // 9 - desafio
+      } else if (method === "DELETE") {
+        const deleteUrl = `${url}/${itemId}`;
 
-                setError("Houve um erro ao carregar os dados!");
-            }
+        const res = await fetch(deleteUrl, config);
 
-            setLoading(false);
-        };
+        const json = await res.json();
 
-        fetchData();
-    }, [url, callFetch]);
+        setCallFetch(json);
+      }
+    };
 
-    // 5 - refatorando post
-    useEffect(() => {
-        const httpRequest = async () => {
-            if (method === "POST") {
-                // 7 - loading no post
-                // mudar throttling no network p 3g
-                setLoading(true);
+    httpRequest();
+  }, [config]);
 
-                // 5 - refatorando post
-                let fetchOptions = [url, config];
+  console.log(config);
 
-                const res = await fetch(...fetchOptions);
-
-                const json = await res.json();
-
-                setCallFetch(json);
-                // 9 - desafio
-            } else if (method === "DELETE") {
-                const deleteUrl = `${url}/${itemId}`;
-
-                const res = await fetch(deleteUrl, config);
-
-                const json = await res.json();
-
-                setCallFetch(json);
-            }
-        };
-
-        httpRequest();
-    }, [config]);
-
-    console.log(config);
-
-    return { data, httpConfig, loading, error };
+  return { data, httpConfig, loading, error };
 };

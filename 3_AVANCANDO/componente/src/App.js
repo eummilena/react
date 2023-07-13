@@ -33,8 +33,9 @@ function App() {
   function showMessage() {
     console.log("Evento do componente pai")
   }
-
+  // estado gerenciado pelo componente pai
   const [message, setMessage] = useState("");
+  // altera o estado
   const handleMessage = (msg) => {
     setMessage(msg);
   }
@@ -82,8 +83,8 @@ function App() {
       </ExecuterFunction>
 
       {/* state lift*/}
-      <Message msg={message} />
-      <ChangeMessageState handleMessage={handleMessage} />
+      <Message msg={message} />{/* componente que consome o estado */}
+      <ChangeMessageState handleMessage={handleMessage} />{/* componente que altera o estado */}
 
       {users.map((user) => (
         <UserDetails

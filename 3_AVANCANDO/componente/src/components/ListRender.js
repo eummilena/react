@@ -31,6 +31,7 @@ const ListRender = () => {
                 <li key={user.id}>{user.name} - {user.age}</li>
             ))}
             </ul>
+            {/* vai deletar os usuarios de uma lista*/}
             <button onClick={deleteRandom}>Delete random user</button>
         </div>
     )

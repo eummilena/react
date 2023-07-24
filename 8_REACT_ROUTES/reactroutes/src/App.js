@@ -1,11 +1,13 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from "./pages/Home";
 import About from './pages/About';
 import Navbar from './components/Navbar';
 import Product from './pages/Product';
 import Info from './pages/Info';
 import NotFound from './pages/NotFound';
+import SearchForm from './components/SearchForm';
+import Search from './pages/Search';
 
 function App() {
   return (
@@ -14,15 +16,21 @@ function App() {
       <BrowserRouter>
         {/* links com react router */}
         <Navbar />
+        <SearchForm />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           {/* nested routes */}
           <Route path='/products/:id/Info/' element={<Info />} />
           {/* rota dinamica */}
+          <Route path='*' element={<NotFound />} />
+          {/** search */}
+          <Route path='/search' element={<Search />} />
+          {/* redirect */}
+          <Route path="/company" element={<Navigate to="/about" />} />
           <Route path='/products/:id' element={<Product />} />
           {/** no master found */}
-          <Route path='*' element={<NotFound />} />
+
         </Routes>
       </BrowserRouter>
     </div>

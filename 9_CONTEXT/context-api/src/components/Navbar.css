@@ -1,0 +1,21 @@
+.navbar{
+    margin:10px;
+}
+.navbar a{
+  margin:5px;
+  padding:5px;
+}
+a{
+    text-decoration:none;
+    color:#000
+}
+a:hover{
+    background:#ccc;
+    border-radius:5px;
+    color:#fff;
+}
+.active{
+    background:#ccc;
+    border-radius:5px;
+    color:#fff;
+}

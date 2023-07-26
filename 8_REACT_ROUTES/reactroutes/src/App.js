@@ -30,7 +30,6 @@ function App() {
           <Route path="/company" element={<Navigate to="/about" />} />
           <Route path='/products/:id' element={<Product />} />
           {/** no master found */}
-
         </Routes>
       </BrowserRouter>
     </div>
